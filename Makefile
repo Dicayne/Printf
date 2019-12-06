@@ -6,14 +6,15 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2019/12/06 14:24:25 by vmoreau          ###   ########.fr        #
+#    Updated: 2019/12/06 20:27:57 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #PRINTF
 NAME = libftprintf.a
 
-SRCS = src/test.c
+SRCS =		src/ft_printf.c	src/print_s.c	src/print_d.c	src/print_c.c	\
+			src/print_i.c	
 
 OBJS = $(SRCS:.c=.o)
 
@@ -28,45 +29,51 @@ CFLAGS = -Werror -Wall -Wextra
 LIBLINK = -L./ -lftprintf
 
 #LIBFT
-LIB = libft/
+LIB = Libft/
 
 OBJLIB = $(LIB)src/*.o
 
-#RULE
-all : target $(NAME)
+LIBFT = $(LIB)libft.a
 
-target :
-	@$(MAKE) -C libft re
+#RULE
+all : complib $(NAME)
 
 $(OBJS) : %.o: %.c $(HEADER)
-	@$(CC) $(CFLAGS) -I$(INCL) -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(INCL) -c $< -o $@ 
 
-$(NAME) : echoCL echoCS $(OBJS) echoAR
+$(NAME) : echoCL $(OBJS) echoCS echoAR
 	@ar rcs $@ $(OBJS) $(OBJLIB)
 
-exec :
-	$(CC) $(CFLAGS) main.c $(LIBLINK)
+complib :
+	@$(MAKE) -C libft all
 
-cleanlib :
+exec :
+	@$(CC) $(CFLAGS) main.c $(LIBLINK)
+
+cleanlibft :
+	@$(MAKE) -C libft clean
+
+fcleanlibft :
 	@$(MAKE) -C libft fclean
 	
-clean : echoCLEAN
+clean : echoCLEAN cleanlibft
 	@$(RM) $(OBJS)
 
-fclean : cleanlib clean echoFCLEAN
+fclean : clean echoFCLEAN fcleanlibft
 	@$(RM) $(NAME)
 
 re : fclean all
 
 #ECHO
 echoCL:
-	@echo "\033[1;33m===> Compiling Libftprintf\033[m"
+	@echo "\033[33;33m===> Compiling Libftprintf\033[m"
 echoCS :
-	@echo "\033[33;32m===> Compilation Success\033[m"
+	@echo "\033[1;32m===> Compilation Success\033[m"
 echoCLEAN :
-	@echo "\033[1;35m===> Cleanning OBJ Libftprintf\033[m"
+	@echo "\033[35m===> Cleanning OBJ Libftprintf\033[m"
 echoFCLEAN :
-	@echo "\033[1;35m===> Cleanning Libftprintf.a\033[m"
+	@echo "\033[35m===> Cleanning Libftprintf.a\033[m"
 echoAR :
-	@echo "\033[33;36m===> Archiving Libftprintf\033[m"
-.PHONY : all clean fclean re target exec cleanlib
+	@echo "\033[1;36m===> Archiving Libftprintf\033[m"
+
+.PHONY : all clean fclean re complib exec cleanlibft fcleanlibft

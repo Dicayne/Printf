@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_s.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 15:17:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/06 20:31:44 by vmoreau          ###   ########.fr       */
+/*   Created: 2019/12/06 19:50:54 by vmoreau           #+#    #+#             */
+/*   Updated: 2019/12/06 19:56:31 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/ft_printf.h"
+#include "../header/ft_printf.h"
 
-int main()
+void	print_s(va_list args)
 {
-	char *str = "Coucou je suis victor j'ai";
-	int nb = 23;
-	char c = 'p';
-	int p;
-	int ftp;
+	char *str;
 
-	ftp = ft_printf("MY   :%s %dans %c%i\n", str, nb, c, nb);
-	p = printf("BASE :%s %dans %c%i\n", str, nb, c, nb);
-	printf("%d	%d", ftp, p);
-	return (0);
+	str = va_arg(args, char *);
+	ft_putstr(str);
 }

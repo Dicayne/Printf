@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   print_i.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 18:26:24 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/06 13:00:29 by vmoreau          ###   ########.fr       */
+/*   Created: 2019/12/06 20:26:44 by vmoreau           #+#    #+#             */
+/*   Updated: 2019/12/06 20:27:25 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-void	test()
+void	print_i(va_list args)
 {
-	printf("TOTO");
+	int nbr;
+
+	nbr = va_arg(args, int);
+	ft_putnbr(nbr);
 }
