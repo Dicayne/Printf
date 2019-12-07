@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:56:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/07 21:01:54 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/07 23:49:00 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ static int		find_size(int nb)
 	int size;
 
 	size = 0;
+	if (nb == -2147483648)
+		return (11);
+	if (nb < 0)
+	{
+		nb = -nb;
+		size++;
+	}
 	while (nb > 0)
 	{
 		nb = nb / 10;

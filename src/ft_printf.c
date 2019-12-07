@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 17:51:54 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/07 21:12:49 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/07 23:49:10 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	check_after_persent(const char *str, va_list args, int *ret)
 {
-	int i;
-
-	i = 1;
-	if (str[i] == '%')
+	if (str[0] == '%')
+	{
 		ft_putchar('%');
-	else if (str[i] == 's')
+		*ret = *ret - 1;
+	}
+	else if (str[0] == 's')
 		print_s(args, ret);
-	else if (str[i] == 'd' || str[i] == 'i')
+	else if (str[0] == 'd' || str[0] == 'i')
 		print_di(args, ret);
-	else if (str[i] == 'c')
+	else if (str[0] == 'c')
 		print_c(args, ret);
-	else if (str[i] == 'p')
+	else if (str[0] == 'p')
 		print_p(args, ret);
-	else if (str[i] == 'u')
+	else if (str[0] == 'u')
 		print_u(args, ret);
-	else if (str[i] == 'x' || str[i] == 'X')
-		print_xX(args, ret, str[i]);
+	else if (str[0] == 'x' || str[0] == 'X')
+		print_xX(args, ret, str[0]);
 }
 
 int		ft_printf(const char *str, ...)
@@ -46,8 +46,8 @@ int		ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
+			i++;
 			check_after_persent(&str[i], args, &nb_read);
-			str[i + 1] == '%' ? i = i + 2 : i++;
 		}
 		else
 			ft_putchar(str[i]);

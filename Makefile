@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2019/12/07 21:09:49 by vmoreau          ###   ########.fr        #
+#    Updated: 2019/12/07 23:10:05 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ complib :
 
 exec :
 	@$(CC) $(CFLAGS) main.c $(LIBLINK)
+	./a.out
 
 cleanlibft :
 	@$(MAKE) -C libft clean

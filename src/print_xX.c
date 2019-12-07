@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 21:06:02 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/07 21:13:46 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/07 23:42:50 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		find_size(unsigned long adrul)
 
 void			print_xX(va_list args, int *ret, char x)
 {
-	unsigned long	adrul;
+	unsigned int	adrul;
 	char			*adr;
 	int				i;
 	char 			*hexa;
@@ -36,9 +36,9 @@ void			print_xX(va_list args, int *ret, char x)
 		hexa = HEXA_UP;
 	else
 		hexa = HEXA_LOW;
-	adrul = va_arg(args, unsigned long);
+	adrul = va_arg(args, unsigned int);
 	i = find_size(adrul);
-	*ret = *ret + i;
+	*ret = *ret + i - 2;
 	adr = (char *)malloc(sizeof(char) * (i + 1));
 	if (adr != NULL)
 	{
