@@ -6,15 +6,15 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2019/12/06 20:27:57 by vmoreau          ###   ########.fr        #
+#    Updated: 2019/12/07 21:09:49 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #PRINTF
 NAME = libftprintf.a
 
-SRCS =		src/ft_printf.c	src/print_s.c	src/print_d.c	src/print_c.c	\
-			src/print_i.c	
+SRCS =		src/ft_printf.c	src/print_s.c	src/print_di.c	src/print_c.c	\
+			src/print_p.c	src/print_u.c	src/print_xX.c	
 
 OBJS = $(SRCS:.c=.o)
 
