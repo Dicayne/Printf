@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 18:27:27 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/07 23:13:09 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/10 16:59:14 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,25 @@
 # define HEXA_LOW "0123456789abcdef"
 # define HEXA_UP "0123456789ABCDEF"
 
-int		ft_printf(const char *str, ...);
-void	print_s(va_list args, int *ret);
-void	print_di(va_list args, int *ret);
-void	print_c(va_list args, int *ret);
-void	print_p(va_list args, int *ret);
-void	print_i(va_list args, int *ret);
-void	print_u(va_list args, int *ret);
-void	print_xX(va_list args, int *ret, char x);
+typedef struct	s_struct
+{
+	va_list args;
+	int		i;
+	int		nb_read;
+	int		nb_str;
+	int		field;
+	int		bool;
+	int		prec;
+	int		bool_s;
+	int		tmp;
+}				t_struct;
+int				ft_printf(const char *str, ...);
+void			print_s(t_struct *st);
+void			print_di(t_struct *st);
+void			print_c(t_struct *st);
+void			print_p(t_struct *st);
+void			print_i(t_struct *st);
+void			print_u(t_struct *st);
+void			print_x(t_struct *st, char x);
+void			print_0(t_struct *st);
 #endif

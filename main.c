@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 15:17:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/07 23:58:43 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/10 21:06:57 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 int main()
 {
-	char *str = "Coucou";
-	int nb = -2147483648;
-	char c = 'p';
-	unsigned int nbu = 4294967295;
+	// char *str = "Coucou";
+	// int nb = -2147483648;
+	// char c = 'p';
+	unsigned int nbu = 42954729;
 	int p;
 	int ftp;
-
-	ftp = ft_printf("MYPF :pst:%% s:|%s| x:|%x| X:|%X| i:|%i| p:|%p| u:|%u| d:|%d| c:|%c|\n", str, nb, nb, nb, str, nbu, nb, c);
-		 p = printf("BASE :pst:%% s:|%s| x:|%x| X:|%X| i:|%i| p:|%p| u:|%u| d:|%d| c:|%c|\n", str, nb, nb, nb, str, nbu, nb, c);
+	//void *str = NULL;
+	ftp = ft_printf("M:%7.8X\n", nbu);
+		 p = printf("B:%7.8X\n", nbu);
 	printf("MYPF:%d			BASE:%d\n", ftp, p);
+	if (p == ftp)
+		printf("\033[0;42m               OK :) \033[0m\n");
+	else
+		printf("\033[0;41m               KO :( \033[0m\n");
 	return (0);
 }

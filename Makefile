@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2019/12/07 23:10:05 by vmoreau          ###   ########.fr        #
+#    Updated: 2019/12/10 20:51:02 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 NAME = libftprintf.a
 
 SRCS =		src/ft_printf.c	src/print_s.c	src/print_di.c	src/print_c.c	\
-			src/print_p.c	src/print_u.c	src/print_xX.c	
+			src/print_p.c	src/print_u.c	src/print_x.c	src/print_0.c	\
+			
 
 OBJS = $(SRCS:.c=.o)
 
@@ -49,7 +50,8 @@ complib :
 
 exec :
 	@$(CC) $(CFLAGS) main.c $(LIBLINK)
-	./a.out
+	#@$(CC) $(CFLAGS) main_test.c $(LIBLINK)
+	@./a.out
 
 cleanlibft :
 	@$(MAKE) -C libft clean
@@ -62,6 +64,7 @@ clean : echoCLEAN cleanlibft
 
 fclean : clean echoFCLEAN fcleanlibft
 	@$(RM) $(NAME)
+	@rm -rf a.out a.out.dSYM
 
 re : fclean all
 

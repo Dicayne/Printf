@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:56:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/07 23:49:00 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/09 19:44:31 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,29 @@ static int		find_size(int nb)
 	return (size);
 }
 
-void			print_di(va_list args, int *ret)
+void			print_di(t_struct *st)
 {
 	int nbr;
 
-	nbr = va_arg(args, int);
+	nbr = va_arg(st->args, int);
+	st->nb_str++;
+	if (st->field > 0 && st->prec == 0)
+	{
+		st->field = st->field - find_size(nbr);
+		st->nb_read = st->nb_read + find_size(nbr) + st->field - st->nb_str;
+		print_0(st);
+	}
+	else if (st->prec > 0 && st->prec >= find_size(nbr))
+	{
+		if (st->field > 0 && st->field > st->prec)
+			st->field = st->field - st->prec;
+		else
+			st->field = 0;
+		st->prec = st->prec - find_size(nbr);
+		st->nb_read += find_size(nbr) + st->field + st->prec - st->nb_str;
+		print_0(st);
+	}
+	else
+		st->nb_read = st->nb_read + find_size(nbr) - st->nb_str;
 	ft_putnbr(nbr);
-	*ret = *ret + find_size(nbr) - 2;
 }

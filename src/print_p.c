@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 16:25:47 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/07 21:02:21 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/09 15:37:16 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int		find_size(unsigned long adrul)
 	int size;
 
 	size = 0;
+	if (adrul == 0)
+		return (1);
 	while (adrul > 0)
 	{
 		adrul = adrul / 16;
@@ -25,21 +27,21 @@ static int		find_size(unsigned long adrul)
 	return (size);
 }
 
-void			print_p(va_list args, int *ret)
+void			print_p(t_struct *st)
 {
 	unsigned long	adrul;
 	char			*adr;
 	int				i;
 
-	adrul = va_arg(args, unsigned long);
+	adrul = va_arg(st->args, unsigned long);
 	i = find_size(adrul);
-	*ret = *ret + i;
+	st->nb_read = st->nb_read + i;
 	adr = (char *)malloc(sizeof(char) * (i + 1));
 	if (adr != NULL)
 	{
 		adr[i] = '\0';
 		i--;
-		while (adrul > 0)
+		while (adrul > 0 || i >= 0)
 		{
 			adr[i] = HEXA_LOW[(adrul % 16)];
 			adrul = adrul / 16;

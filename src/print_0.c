@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_c.c                                          :+:      :+:    :+:   */
+/*   print_0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 20:02:19 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/09 13:47:15 by vmoreau          ###   ########.fr       */
+/*   Created: 2019/12/09 16:22:56 by vmoreau           #+#    #+#             */
+/*   Updated: 2019/12/09 19:14:06 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-void	print_c(t_struct *st)
+void	print_0(t_struct *st)
 {
 	char c;
+	char d;
 
-	st->nb_read = st->nb_read - 1;
-	c = va_arg(st->args, int);
-	ft_putchar(c);
+	c = ' ';
+	d = '0';
+	if (st->bool == 1)
+	{
+		c = '0';
+		d = ' ';
+	}
+	while (st->field > 0)
+	{
+		ft_putchar(d);
+		st->field--;
+	}
+	while (st->prec > 0)
+	{
+		ft_putchar(c);
+		st->prec--;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 20:33:11 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/07 21:02:47 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/10 20:54:03 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int		find_size(unsigned int nb)
 	int size;
 
 	size = 0;
+	if (nb == 0)
+		return (1);
 	while (nb > 0)
 	{
 		nb = nb / 10;
@@ -36,11 +38,12 @@ static void		ft_putnbr_u(unsigned int nb)
 		ft_putchar(nb + '0');
 }
 
-void			print_u(va_list args, int *ret)
+void			print_u(t_struct *st)
 {
 	unsigned int nbr;
 
-	nbr = va_arg(args, unsigned int);
+	st->nb_str++;
+	nbr = va_arg(st->args, unsigned int);
 	ft_putnbr_u(nbr);
-	*ret = *ret + find_size(nbr) - 2;
+	st->nb_read += find_size(nbr) - st->nb_str;
 }
