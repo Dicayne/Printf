@@ -6,19 +6,40 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 17:51:54 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/10 20:24:12 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/11 18:42:43 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-static void		flags_0(const char *str, t_struct *st)
+static void		check_prec(const char *str, t_struct *st)
 {
-	if (str[st->i] == '0' || str[st->i] == '.')
+	if (str[st->i] == '*')
 	{
+		st->prec = va_arg(st->args, int);
 		st->i++;
 		st->nb_str++;
-		st->bool_s = 1;
+	}
+	while (str[st->i] >= '0' && str[st->i] <= '9')
+	{
+		st->prec = st->prec * 10 + (str[st->i] - '0');
+		st->i++;
+		st->nb_str++;
+	}
+}
+
+static void		check_field(const char *str, t_struct *st)
+{
+	if (str[st->i] == '*')
+	{
+		st->field = va_arg(st->args, int);
+		if (st->field < 0)
+		{
+			st->dash = 1;
+			st->field = -st->field;
+		}
+		st->i++;
+		st->nb_str++;
 	}
 	while (str[st->i] >= '0' && str[st->i] <= '9')
 	{
@@ -31,24 +52,37 @@ static void		flags_0(const char *str, t_struct *st)
 		st->i++;
 		st->nb_str++;
 		st->bool = 1;
+		check_prec(str, st);
 	}
-	while (str[st->i] >= '0' && str[st->i] <= '9')
+}
+
+static void		flags(const char *str, t_struct *st)
+{
+	if (str[st->i] == '0' || str[st->i] == '.')
 	{
-		st->prec = st->prec * 10 + (str[st->i] - '0');
 		st->i++;
 		st->nb_str++;
+		st->bool_s = 1;
 	}
+	else if (str[st->i] == '-')
+	{
+		while (str[st->i] == '-')
+		{
+			st->i++;
+			st->nb_str++;
+		}
+		if (str[st->i] != '.' || (str[st->i] < '0' && str[st->i] > '9'))
+			st->dash = 1;
+	}
+	check_field(str, st);
 }
 
 static void		check_after_persent(const char *str, t_struct *st)
 {
-	st->field = 0;
-	st->prec = 0;
-	st->bool = 0;
-	st->bool_s = 0;
-	st->nb_str = 1;
-	if (str[st->i] == '.' || (str[st->i] >= '0' && str[st->i] <= '9'))
-		flags_0(str, st);
+	init_struct(st);
+	if (str[st->i] == '.' || (str[st->i] >= '0' && str[st->i] <= '9')
+		|| str[st->i] == '-' || str[st->i] == '*')
+		flags(str, st);
 	if (str[st->i] == '%')
 	{
 		ft_putchar('%');

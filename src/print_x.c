@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 21:06:02 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/10 21:08:52 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/11 16:32:07 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@ static int		find_size(unsigned long adrul)
 	return (size);
 }
 
-static void	check_st(t_struct *st, int size)
-{
-	if (st->field > size || st->prec > size)
-	{
-		
-	}
-	st->nb_read += size + st->field - st->nb_str;
-}
-
 void			print_x(t_struct *st, char x)
 {
 	unsigned int	adrul;
@@ -50,7 +41,7 @@ void			print_x(t_struct *st, char x)
 		hexa = HEXA_LOW;
 	adrul = va_arg(st->args, unsigned int);
 	i = find_size(adrul);
-	check_st(st, i);
+	check_diuxpc(st, i);
 	if (!(adr = (char *)malloc(sizeof(char) * (i + 1))))
 		return ;
 	adr[i] = '\0';

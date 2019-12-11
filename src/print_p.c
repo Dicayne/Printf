@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 16:25:47 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/09 15:37:16 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/11 17:53:01 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,30 @@ static int		find_size(unsigned long adrul)
 	return (size);
 }
 
+static void		check(t_struct *st, int size)
+{
+	if (st->field > 0 && st->prec == 0 && st->bool_s == 0)
+	{
+		st->bool = 1;
+		check_diuxpc(st, size);
+	}
+	else
+		st->nb_read -= st->nb_str - size;
+}
+
 void			print_p(t_struct *st)
 {
 	unsigned long	adrul;
 	char			*adr;
 	int				i;
 
+	st->nb_str++;
 	adrul = va_arg(st->args, unsigned long);
 	i = find_size(adrul);
-	st->nb_read = st->nb_read + i;
 	adr = (char *)malloc(sizeof(char) * (i + 1));
 	if (adr != NULL)
 	{
+		check(st, i + 2);
 		adr[i] = '\0';
 		i--;
 		while (adrul > 0 || i >= 0)

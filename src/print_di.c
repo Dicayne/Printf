@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:56:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/09 19:44:31 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/11 18:40:14 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		find_size(int nb)
 
 	size = 0;
 	if (nb == -2147483648)
-		return (11);
+		return (10);
 	if (nb < 0)
 	{
 		nb = -nb;
@@ -32,29 +32,56 @@ static int		find_size(int nb)
 	return (size);
 }
 
+static void		print(int nbr, t_struct *st)
+{
+	if (nbr > -2147483648)
+	{
+		if (nbr < 0)
+			nbr = -nbr;
+		ft_putnbr(nbr);
+	}
+	else
+	{
+		nbr = 214748364;
+		ft_putnbr(nbr);
+		ft_putchar('8');
+	}
+	if (st->dash == 1)
+	{
+		st->nb_read += st->tmp2;
+		while (st->tmp2 > 0)
+		{
+			ft_putchar(' ');
+			st->tmp2--;
+		}
+	}
+}
+
 void			print_di(t_struct *st)
 {
 	int nbr;
+	int size;
 
-	nbr = va_arg(st->args, int);
 	st->nb_str++;
-	if (st->field > 0 && st->prec == 0)
+	nbr = va_arg(st->args, int);
+	if (nbr < 0 && st->field == 0)
 	{
-		st->field = st->field - find_size(nbr);
-		st->nb_read = st->nb_read + find_size(nbr) + st->field - st->nb_str;
-		print_0(st);
+		st->field--;
+		st->nb_read++;
+		ft_putchar('-');
+		st->less = 2;
 	}
-	else if (st->prec > 0 && st->prec >= find_size(nbr))
+	else if (nbr < 0 && st->field > 0)
 	{
-		if (st->field > 0 && st->field > st->prec)
-			st->field = st->field - st->prec;
-		else
-			st->field = 0;
-		st->prec = st->prec - find_size(nbr);
-		st->nb_read += find_size(nbr) + st->field + st->prec - st->nb_str;
-		print_0(st);
+		st->prec++;
+		st->less = 2;
 	}
-	else
-		st->nb_read = st->nb_read + find_size(nbr) - st->nb_str;
-	ft_putnbr(nbr);
+	size = find_size(nbr);
+	if (st->dash == 1)
+	{
+		st->tmp2 = st->field - st->prec;
+		st->field = 0;
+	}
+	check_diuxpc(st, size);
+	print(nbr, st);
 }

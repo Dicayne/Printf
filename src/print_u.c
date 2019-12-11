@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 20:33:11 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/10 20:54:03 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/11 17:53:59 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ static void		ft_putnbr_u(unsigned int nb)
 
 void			print_u(t_struct *st)
 {
-	unsigned int nbr;
+	unsigned int	nbr;
+	int				size;
 
 	st->nb_str++;
 	nbr = va_arg(st->args, unsigned int);
+	size = find_size(nbr);
+	check_diuxpc(st, size);
 	ft_putnbr_u(nbr);
-	st->nb_read += find_size(nbr) - st->nb_str;
 }

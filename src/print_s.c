@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:50:54 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/10 20:58:44 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/11 13:51:34 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void		check_st2(t_struct *st, int size)
 	}
 }
 
-static void		check_st(t_struct *st, int size)
+static void		check_st1(t_struct *st, int size)
 {
 	if (st->prec == 0 && st->field == 0 && st->bool_s == 0)
 	{
@@ -121,7 +121,7 @@ void			print_s(t_struct *st)
 	if (str == NULL)
 		str = "(null)";
 	size = ft_strlen(str);
-	check_st(st, size);
+	check_st1(st, size);
 	while (str[i] != '\0' && i < st->field)
 	{
 		write(1, &str[i], 1);

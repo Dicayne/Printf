@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 02:48:26 by moudmine          #+#    #+#             */
-/*   Updated: 2019/12/10 20:06:59 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/11 17:11:44 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -590,7 +590,7 @@ int main()
 	else
 		printf("\033[0;41m               KO :( \033[0m\n");
 
-	printf("\033[1;32m ############YOUR SCORE IS : %d/10  ####################\033[0m\n", count);
+	printf("\033[1;32m ############YOUR SCORE IS : %d/11  ####################\033[0m\n", count);
 
 	if (countf != 30)
 		printf("\n\n\033[1;31m                    ############YOUR FINAL SCORE IS : %d/30  (MUST RETRY ...)##################\033[0m\n", countf);
