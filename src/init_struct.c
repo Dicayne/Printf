@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 17:23:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/11 17:24:29 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/12 18:20:57 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		init_struct(t_struct *st)
 	st->prec = 0;
 	st->bool = 0;
 	st->bool_s = 0;
+	st->bool_s2 = 0;
 	st->nb_str = 1;
 	st->dash = 0;
 }

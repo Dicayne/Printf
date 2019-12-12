@@ -1,36 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_s.c                                          :+:      :+:    :+:   */
+/*   print_per.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 19:50:54 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/12 17:25:48 by vmoreau          ###   ########.fr       */
+/*   Created: 2019/12/12 12:20:15 by vmoreau           #+#    #+#             */
+/*   Updated: 2019/12/12 18:47:31 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-static void		print(t_struct *st, int size, char *str)
+static void		check(t_struct *st)
 {
-	int i;
+	if (st->field > 0 && st->prec == 0 && st->bool_s == 0)
+	{
+		if (st->dash == 1)
+		{
+			st->tmp2 = st->field - 1;
+			st->field = 0;
+		}
+		st->bool = 1;
+		check_diuxpc(st, 1);
+	}
+	else if (st->field > 0 && st->prec > 0 && st->bool_s == 0)
+	{
+		st->nb_read -= st->nb_str - st->field;
+		st->field -= 1;
+		st->prec = 0;
+		print_0(st);
+	}
+	else
+		st->nb_read -= st->nb_str - 1;
+}
 
-	i = 0;
+void			print_per(t_struct *st)
+{
+	char c;
+
+	st->nb_str++;
+	c = '%';
+	check(st);
+	ft_putchar(c);
 	if (st->dash == 1)
 	{
-		st->tmp2 = st->field;
-		st->field = 0;
-	}
-	check_s(st, size);
-	while (str[i] != '\0' && i < st->field)
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-	if (st->dash == 1)
-	{
-		st->tmp2 -= size;
 		st->nb_read += st->tmp2;
 		while (st->tmp2 > 0)
 		{
@@ -38,19 +52,4 @@ static void		print(t_struct *st, int size, char *str)
 			st->tmp2--;
 		}
 	}
-}
-
-void			print_s(t_struct *st)
-{
-	char	*str;
-	int		size;
-	int		bool;
-
-	bool = 0;
-	st->nb_str++;
-	str = va_arg(st->args, char *);
-	if (str == NULL)
-		str = "(null)";
-	size = ft_strlen(str);
-	print(st, size, str);
 }

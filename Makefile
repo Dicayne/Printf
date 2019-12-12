@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2019/12/11 18:42:59 by vmoreau          ###   ########.fr        #
+#    Updated: 2019/12/12 17:15:51 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ NAME = libftprintf.a
 SRCS =		src/ft_printf.c	src/print_s.c	src/print_di.c	src/print_c.c	\
 			src/print_p.c	src/print_u.c	src/print_x.c	src/print_0.c	\
 			src/init_struct.c				src/check_diuxpc.c				\
+			src/print_per.c	src/check_s.c	
 			
 
 OBJS = $(SRCS:.c=.o)
@@ -50,8 +51,8 @@ complib :
 	@$(MAKE) -C libft all
 
 exec :
-	#@$(CC) $(CFLAGS) main.c $(LIBLINK)
-	@$(CC) $(CFLAGS) main_test.c $(LIBLINK)
+	@$(CC) $(CFLAGS) main.c $(LIBLINK)
+	#@$(CC) $(CFLAGS) main_test.c $(LIBLINK)
 	@./a.out
 
 cleanlibft :

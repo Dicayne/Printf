@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 18:27:27 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/11 18:40:19 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/12 18:20:35 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ typedef struct	s_struct
 	int		nb_read;
 	int		nb_str;
 	int		field;
-	int		bool;
 	int		prec;
+	int		bool;
 	int		bool_s;
+	int		bool_s2;
 	int		tmp;
 	int		tmp2;
 	int		dash;
@@ -40,10 +41,12 @@ void			init_struct(t_struct *st);
 void			print_s(t_struct *st);
 void			print_di(t_struct *st);
 void			print_c(t_struct *st);
+void			print_per(t_struct *st);
 void			print_p(t_struct *st);
 void			print_i(t_struct *st);
 void			print_u(t_struct *st);
 void			print_x(t_struct *st, char x);
 void			print_0(t_struct *st);
 void			check_diuxpc(t_struct *st, int size);
+void			check_s(t_struct *st, int size);
 #endif

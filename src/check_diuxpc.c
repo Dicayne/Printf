@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 13:48:20 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/11 16:33:52 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/12 16:23:49 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void			check_diuxpc(t_struct *st, int size)
 		st->prec = 0;
 		st->field -= size;
 		st->tmp = st->field;
+		if (st->bool_s == 0)
+			st->bool = 1;
 		print_0(st);
 		st->nb_read += st->tmp + size - st->nb_str;
 	}

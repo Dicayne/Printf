@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 17:51:54 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/11 18:42:43 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/12 18:21:09 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,15 @@ static void		check_field(const char *str, t_struct *st)
 
 static void		flags(const char *str, t_struct *st)
 {
+	if (str[st->i] == '0' && str[st->i + 1] == '-')
+	{
+		st->i++;
+		st->nb_str++;
+	}
 	if (str[st->i] == '0' || str[st->i] == '.')
 	{
+		if (str[st->i] == '.')
+			st->bool_s2 = 1;
 		st->i++;
 		st->nb_str++;
 		st->bool_s = 1;
@@ -84,10 +91,7 @@ static void		check_after_persent(const char *str, t_struct *st)
 		|| str[st->i] == '-' || str[st->i] == '*')
 		flags(str, st);
 	if (str[st->i] == '%')
-	{
-		ft_putchar('%');
-		st->nb_read--;
-	}
+		print_per(st);
 	else if (str[st->i] == 's')
 		print_s(st);
 	else if (str[st->i] == 'd' || str[st->i] == 'i')
