@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 15:17:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 03:01:00 by vmoreau          ###   ########.fr       */
+/*   Created: 2019/12/14 16:03:16 by vmoreau           #+#    #+#             */
+/*   Updated: 2019/12/15 02:46:51 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/ft_printf.h"
-#include <limits.h>
+#include "../header/ft_printf.h"
 
-int main()
+void	init_struct(t_flags *flg, t_struct *st)
 {
-	int p;
-	int ftp;
-
-	ftp = ft_printf("M:%.6s$\n", "");
-		p =  printf("B:%.6s$\n", "");
-	printf("MYPF:%d			BASE:%d\n", ftp, p);
-	if (p == ftp)
-		printf("\033[0;42m               OK :) \033[0m\n");
-	else
-		printf("\033[0;41m               KO :( \033[0m\n");
-	return (0);
+	flg->field = 0;
+	flg->prec = 0;
+	flg->dash = 0;
+	flg->zero = 0;
+	flg->dot = 0;
+	st->min_int = 0;
+	st->read = 0;
 }

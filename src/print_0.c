@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 15:17:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 03:01:00 by vmoreau          ###   ########.fr       */
+/*   Created: 2019/12/09 16:22:56 by vmoreau           #+#    #+#             */
+/*   Updated: 2019/12/15 01:34:18 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/ft_printf.h"
-#include <limits.h>
+#include "../header/ft_printf.h"
 
-int main()
+void	print_field_d1(t_flags *flg)
 {
-	int p;
-	int ftp;
+	while (flg->field > 0)
+	{
+		ft_putchar(' ');
+		flg->field--;
+	}
+}
 
-	ftp = ft_printf("M:%.6s$\n", "");
-		p =  printf("B:%.6s$\n", "");
-	printf("MYPF:%d			BASE:%d\n", ftp, p);
-	if (p == ftp)
-		printf("\033[0;42m               OK :) \033[0m\n");
-	else
-		printf("\033[0;41m               KO :( \033[0m\n");
-	return (0);
+void	print_0(t_flags *flg)
+{
+	if (flg->zero == 0 && flg->dash == 0)
+	{
+		while (flg->field > 0)
+		{
+			ft_putchar(' ');
+			flg->field--;
+		}
+	}
+	else if (flg->zero == 1)
+	{
+		while (flg->field > 0)
+		{
+			ft_putchar('0');
+			flg->field--;
+		}
+	}
 }

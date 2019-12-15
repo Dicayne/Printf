@@ -6,17 +6,18 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2019/12/12 17:15:51 by vmoreau          ###   ########.fr        #
+#    Updated: 2019/12/15 02:23:31 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #PRINTF
 NAME = libftprintf.a
 
-SRCS =		src/ft_printf.c	src/print_s.c	src/print_di.c	src/print_c.c	\
-			src/print_p.c	src/print_u.c	src/print_x.c	src/print_0.c	\
-			src/init_struct.c				src/check_diuxpc.c				\
-			src/print_per.c	src/check_s.c	
+SRCS =		src/ft_printf.c		src/check_flags.c	src/find_size.c		\
+			src/init_struct.c	src/itoas.c			src/print_s.c		\
+			src/print_u.c		src/print_c.c		src/print_x.c		\
+			src/print_p.c		src/print_di.c		src/print_0.c		\
+			src/check_dicuxp.c	src/check_s.c		src/set_ret.c		\
 			
 
 OBJS = $(SRCS:.c=.o)
@@ -52,7 +53,6 @@ complib :
 
 exec :
 	@$(CC) $(CFLAGS) main.c $(LIBLINK)
-	#@$(CC) $(CFLAGS) main_test.c $(LIBLINK)
 	@./a.out
 
 cleanlibft :

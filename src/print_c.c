@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 15:17:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 03:01:00 by vmoreau          ###   ########.fr       */
+/*   Created: 2019/12/14 21:25:40 by vmoreau           #+#    #+#             */
+/*   Updated: 2019/12/15 01:10:38 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/ft_printf.h"
-#include <limits.h>
+#include "../header/ft_printf.h"
 
-int main()
+void			print_c(t_struct *st, t_flags *flg, const char **str)
 {
-	int p;
-	int ftp;
+	char	c;
 
-	ftp = ft_printf("M:%.6s$\n", "");
-		p =  printf("B:%.6s$\n", "");
-	printf("MYPF:%d			BASE:%d\n", ftp, p);
-	if (p == ftp)
-		printf("\033[0;42m               OK :) \033[0m\n");
-	else
-		printf("\033[0;41m               KO :( \033[0m\n");
-	return (0);
+	(void)flg;
+	c = **str;
+	(*str)++;
+	if (c == 'c')
+		c = va_arg(st->args, int);
+	st->nb_read += set_ret(flg, 1);
+	check_dicuxp(flg, st, 1);
+	ft_putchar(c);
+	if (flg->dash == 1)
+		print_field_d1(flg);
 }

@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_dicuxp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 15:17:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 03:01:00 by vmoreau          ###   ########.fr       */
+/*   Created: 2019/12/14 23:36:50 by vmoreau           #+#    #+#             */
+/*   Updated: 2019/12/15 01:28:34 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/ft_printf.h"
-#include <limits.h>
+#include "../header/ft_printf.h"
 
-int main()
+void	check_dicuxp(t_flags *flg, t_struct *st, int size)
 {
-	int p;
-	int ftp;
-
-	ftp = ft_printf("M:%.6s$\n", "");
-		p =  printf("B:%.6s$\n", "");
-	printf("MYPF:%d			BASE:%d\n", ftp, p);
-	if (p == ftp)
-		printf("\033[0;42m               OK :) \033[0m\n");
+	(void)st;
+	if (flg->dash == 1)
+	{
+		if (flg->prec > size)
+			flg->field = flg->field - flg->prec;
+		else
+			flg->field = flg->field - size;
+	}
 	else
-		printf("\033[0;41m               KO :( \033[0m\n");
-	return (0);
+	{
+		if(flg->dot == 0)
+		{
+			flg->field -= size;
+			print_0(flg);
+		}
+	}
 }
