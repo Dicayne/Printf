@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 16:03:16 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 17:44:15 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 16:09:55 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@ void	init_struct(t_flags *flg, t_struct *st)
 {
 	flg->field = 0;
 	flg->prec = 0;
+	flg->prec_neg = 0;
 	flg->dash = 0;
 	flg->zero = 0;
+	flg->zero_dot = 0;
 	flg->dot = 0;
 	flg->less = 0;
+	flg->ptr = 0;
 	st->min_int = 0;
 	st->read = 0;
 	st->bool = 0;

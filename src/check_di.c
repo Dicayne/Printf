@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 23:36:50 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/16 02:34:46 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 20:09:51 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void		check_di3(t_flags *flg, int nbr, int size)
 {
+	(void)nbr;
 	if (flg->field > flg->prec && flg->prec >= size)
 	{
 		if (flg->prec >= size && flg->less == 1)
@@ -26,7 +27,7 @@ static void		check_di3(t_flags *flg, int nbr, int size)
 	else if (flg->field > size && flg->prec < flg->field && flg->prec < size)
 	{
 		flg->field = flg->field - size;
-		if (flg->prec < 0 && nbr == 0)
+		if (flg->prec_neg == 1 && flg->zero_dot == 1)
 			flg->zero = 1;
 		flg->prec = 0;
 		print_0(flg);

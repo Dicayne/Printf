@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 23:36:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/16 02:33:19 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 19:42:05 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,25 @@ static void		check_s2(t_flags *flg, t_struct *st, int size)
 			flg->field -= flg->prec;
 			print_0s(flg);
 		}
+		else if (st->min_int == 1 && flg->dash == 0)
+			flg->field = 0;
+		else if (flg->field < size && st->min_int == 1)
+			flg->field = 0;
 	}
 	else
+	{
+		if (flg->prec_neg == 1)
+			flg->field -= size;
 		st->read = size;
+	}
 	if (flg->field >= size)
 	{
 		if (flg->prec > size)
+		{
+			if (st->bool == 1)
+				flg->field -= 6;
 			flg->field -= size;
+		}
 		else if (flg->prec >= 0)
 			flg->field -= flg->prec;
 		else if (flg->field > size)
@@ -41,11 +53,11 @@ void			check_s(t_flags *flg, t_struct *st, int size)
 {
 	if (flg->dash == 1)
 	{
-		if (flg->prec > size)
+		if (flg->prec > size && st->min_int == 0)
 			flg->field = flg->field - size;
 		else if (flg->field > size && flg->prec < size && flg->dot == 1)
 			flg->field = flg->field;
-		else if (flg->prec > 0 && flg->dot == 1)
+		else if (flg->prec > 0 && flg->dot == 1 && st->min_int == 0)
 			flg->field = flg->field - flg->prec;
 		else if (flg->dot == 0)
 			flg->field = flg->field - size;

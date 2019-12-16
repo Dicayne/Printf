@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:26:47 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/16 00:22:40 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 20:08:17 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,14 @@ typedef struct	s_flags
 {
 	int		field;
 	int		prec;
+	int		prec_neg;
 	int		dash;
 	int		zero;
+	int		zero_dot;
 	int		dot;
 	int		less;
+	int		less2;
+	int		ptr;
 }				t_flags;
 
 /*

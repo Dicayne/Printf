@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 21:14:25 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 20:13:45 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 20:09:37 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ static int		check_negative(int nbr, t_struct *st, t_flags *flg, int *size)
 		st->nb_read++;
 		return (147483648);
 	}
-	else if (nbr < 0 && (flg->prec >= *size || flg->zero == 1))
+	else if (nbr < 0 && (flg->prec >= *size || flg->zero == 1 || 
+				flg->prec_neg == 1))
 	{
 		ft_putchar('-');
 		if (flg->dot == 1 && flg->zero == 0)
 		{
 			(*size)--;
+			if (flg->prec_neg == 1)
+				flg->field--;
 			st->nb_read++;
 		}
 		flg->less = 1;

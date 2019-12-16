@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:54:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 00:50:45 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 20:12:07 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void		check_prec(const char **str, t_flags *flg, t_struct *st)
 	else
 	{
 		flg->prec = va_arg(st->args, int);
+		if (flg->prec < 0)
+			flg->prec_neg = 1;
 		(*str)++;
 	}
 }
@@ -68,9 +70,13 @@ void			check_flags(t_flags *flg, t_struct *st, const char **str)
 	if (**str == '.')
 	{
 		flg->dot = 1;
+		if (flg->zero == 1)
+			flg->zero_dot = 1;
 		flg->zero = 0;
 		(*str)++;
 	}
 	if ((**str >= '0' && **str <= '9') || **str == '*')
 		check_prec(str, flg, st);
+	else if (flg->dot == 1)
+		flg->ptr = 1;
 }
