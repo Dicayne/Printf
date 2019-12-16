@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:26:47 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 20:12:21 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 00:22:40 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int				find_size_hex_ul(unsigned long nbr);
 char			*itoa_hex_ul(unsigned long nbr, int i, char *base);
 char			*itoa_hex(unsigned int nbr, int i, char *base);
 void			check_di(t_flags *flg, t_struct *st, int nbr, int size);
+void			check_di_d1(t_flags *flg, int nbr, int size);
 void			check_uxp(t_flags *flg, t_struct *st, unsigned int nbr, int sz);
 void			check_s(t_flags *flg,t_struct *st, int size);
 void			check_cper(t_flags *flg, int size);

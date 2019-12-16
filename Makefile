@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2019/12/15 20:47:40 by vmoreau          ###   ########.fr        #
+#    Updated: 2019/12/16 00:23:12 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS =		src/ft_printf.c		src/check_flags.c	src/find_size.c		\
 			src/print_u.c		src/print_c.c		src/print_x.c		\
 			src/print_p.c		src/print_di.c		src/print_0.c		\
 			src/check_di.c		src/check_s.c		src/check_cper.c	\
-			src/check_uxp.c		src/set_ret.c		
+			src/check_uxp.c		src/check_di_d.c	src/set_ret.c		
 			
 OBJS = $(SRCS:.c=.o)
 

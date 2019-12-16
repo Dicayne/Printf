@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 23:36:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 16:07:38 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 02:33:19 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,25 @@
 
 static void		check_s2(t_flags *flg, t_struct *st, int size)
 {
-	if (flg->prec <= size)
+	if (flg->prec <= size && flg->prec >= 0)
+	{
 		st->read = flg->prec;
-	else if (flg->prec > size)
+		if (flg->field > flg->prec && flg->dash != 1)
+		{
+			flg->field -= flg->prec;
+			print_0s(flg);
+		}
+	}
+	else
 		st->read = size;
 	if (flg->field >= size)
 	{
-		if (flg->prec >= size)
+		if (flg->prec > size)
 			flg->field -= size;
-		else
+		else if (flg->prec >= 0)
 			flg->field -= flg->prec;
+		else if (flg->field > size)
+			flg->field -= size;
 		print_0s(flg);
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 20:09:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 20:33:35 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 02:35:46 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-static void		check_uxp3(t_flags *flg, int size)
+static void		check_uxp3(t_flags *flg, unsigned int nbr, int size)
 {
 	if (flg->field > flg->prec && flg->prec >= size)
 	{
@@ -26,6 +26,8 @@ static void		check_uxp3(t_flags *flg, int size)
 	else if (flg->field > size && flg->prec < flg->field && flg->prec < size)
 	{
 		flg->field = flg->field - size;
+		if (flg->prec < 0 && nbr != 0)
+			flg->zero = 1;
 		flg->prec = 0;
 		print_0(flg);
 	}
@@ -55,11 +57,27 @@ static void		check_uxp2(t_flags *flg, unsigned int nbr, int size)
 		print_0(flg);
 	}
 	else
-		check_uxp3(flg, size);
+		check_uxp3(flg, nbr, size);
+}
+
+static void		check_uxp_d2(t_flags *flg, unsigned int nbr, int size)
+{
+	if (flg->field > size && flg->prec > size)
+	{
+		flg->field -= flg->prec;
+		flg->prec -= size;
+		print_0(flg);
+	}
+	else if (flg->field < size && flg->prec < flg->field)
+		flg->field = 0;
+	else if (flg->field >= size && flg->prec <= size && nbr > 0)
+		flg->field -= size;
 }
 
 static void		check_uxp_d1(t_flags *flg, unsigned int nbr, int size)
 {
+	if (flg->prec < 0 && flg->field > size)
+		flg->prec = -flg->prec;
 	if (flg->field <= size && flg->prec <= size && nbr > 0)
 		flg->field = 0;
 	if (flg->field <= size && flg->prec >= size)
@@ -73,16 +91,8 @@ static void		check_uxp_d1(t_flags *flg, unsigned int nbr, int size)
 	}
 	else if (flg->field > size && flg->prec > 0 && flg->prec <= size)
 		flg->field -= size;
-	else if (flg->field > size && flg->prec > size)
-	{
-		flg->field -= flg->prec;
-		flg->prec -= size;
-		print_0(flg);
-	}
-	else if (flg->field < size && flg->prec < flg->field)
-		flg->field = 0;
-	else if (flg->field >= size && flg->prec <= size && nbr > 0)
-		flg->field -= size;
+	else
+		check_uxp_d2(flg, nbr, size);
 }
 
 void			check_uxp(t_flags *flg, t_struct *st, unsigned int nbr, int sz)
@@ -91,14 +101,14 @@ void			check_uxp(t_flags *flg, t_struct *st, unsigned int nbr, int sz)
 		st->bool = 1;
 	if (flg->dash == 1)
 	{
-		if(flg->dot == 0)
+		if (flg->dot == 0)
 			flg->field -= sz;
 		else if (flg->dot == 1)
 			check_uxp_d1(flg, nbr, sz);
 	}
 	else
 	{
-		if(flg->dot == 0)
+		if (flg->dot == 0)
 		{
 			flg->field -= sz;
 			print_0(flg);

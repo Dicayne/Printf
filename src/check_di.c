@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 23:36:50 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 20:16:05 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 02:34:46 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-static void		check_di3(t_flags *flg, int size)
+static void		check_di3(t_flags *flg, int nbr, int size)
 {
 	if (flg->field > flg->prec && flg->prec >= size)
 	{
@@ -26,6 +26,8 @@ static void		check_di3(t_flags *flg, int size)
 	else if (flg->field > size && flg->prec < flg->field && flg->prec < size)
 	{
 		flg->field = flg->field - size;
+		if (flg->prec < 0 && nbr == 0)
+			flg->zero = 1;
 		flg->prec = 0;
 		print_0(flg);
 	}
@@ -55,63 +57,7 @@ static void		check_di2(t_flags *flg, int nbr, int size)
 		print_0(flg);
 	}
 	else
-		check_di3(flg, size);
-}
-
-static void		check_di_d2(t_flags *flg, int size)
-{
-	if (flg->field <= size && flg->prec < size)
-		flg->field = 0;
-	else if (flg->field > size && flg->prec < size)
-		flg->field -= size;
-	else if (flg->field > size && flg->prec >= size && flg->prec <= flg->field)
-	{
-		flg->field -= flg->prec + size;
-		flg->prec -= size;
-		print_0(flg);
-	}
-	else if(flg->field > size && flg->prec >= size && flg->prec > flg->field)
-	{
-		flg->field = 0;
-		flg->prec -= size;
-		print_0(flg);
-	}
-	else if (flg->field <= size && flg->prec >= size)
-	{
-		flg->field = 0;
-		flg->prec -= size;
-		print_0(flg);
-	}
-}
-
-static void		check_di_d1(t_flags *flg, int nbr, int size)
-{
-	if (nbr >= 0 && flg->less == 0)
-	{
-		if (flg->field <= size && flg->prec >= size)
-		{
-			flg->field = 0;
-			if (flg->prec > size)
-			{
-				flg->prec -= size;
-				print_0(flg);
-			}
-		}
-		else if (flg->field > size && flg->prec > 0 && flg->prec <= size)
-			flg->field -= size;
-		else if (flg->field > size && flg->prec > size)
-		{
-			flg->field -= flg->prec;
-			flg->prec -= size;
-			print_0(flg);
-		}
-		else if (flg->field < size && flg->prec < flg->field)
-			flg->field = 0;
-		else if (flg->field >= size && flg->prec <= size && nbr > 0)
-			flg->field -= size;
-	}
-	else if(nbr < 0 || flg->less == 1)
-		check_di_d2(flg, size);
+		check_di3(flg, nbr, size);
 }
 
 void			check_di(t_flags *flg, t_struct *st, int nbr, int size)
@@ -120,14 +66,14 @@ void			check_di(t_flags *flg, t_struct *st, int nbr, int size)
 		st->bool = 1;
 	if (flg->dash == 1)
 	{
-		if(flg->dot == 0)
+		if (flg->dot == 0)
 			flg->field -= size;
 		else if (flg->dot == 1)
 			check_di_d1(flg, nbr, size);
 	}
 	else
 	{
-		if(flg->dot == 0)
+		if (flg->dot == 0)
 		{
 			flg->field -= size;
 			print_0(flg);

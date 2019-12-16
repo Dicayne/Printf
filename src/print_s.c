@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 20:53:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 15:14:41 by vmoreau          ###   ########.fr       */
+/*   Updated: 2019/12/16 02:34:59 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			print_s(t_struct *st, t_flags *flg, const char **str)
 {
 	char	*str_read;
 	int		size;
-	
+
 	(*str)++;
 	str_read = va_arg(st->args, char *);
 	if (str_read == NULL)
