@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 21:14:25 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/16 20:09:37 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/09 23:24:36 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		check_negative(int nbr, t_struct *st, t_flags *flg, int *size)
 		st->nb_read++;
 		return (147483648);
 	}
-	else if (nbr < 0 && (flg->prec >= *size || flg->zero == 1 || 
+	else if (nbr < 0 && (flg->prec >= *size || flg->zero == 1 ||
 				flg->prec_neg == 1))
 	{
 		ft_putchar('-');
@@ -49,7 +49,7 @@ void			print_di(t_struct *st, t_flags *flg, const char **str)
 	nbr = va_arg(st->args, int);
 	size = find_size_dec(nbr);
 	nbr = check_negative(nbr, st, flg, &size);
-	st->nb_read += set_ret(flg, nbr, size);
+	st->nb_read += set_ret_di(flg, nbr, size);
 	check_di(flg, st, nbr, size);
 	if (st->min_int == 1)
 		ft_putchar('2');

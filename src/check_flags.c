@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:54:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/16 20:12:07 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/09 17:47:29 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static void		check_prec(const char **str, t_flags *flg, t_struct *st)
 	if (**str >= '0' && **str <= '9')
 	{
 		flg->prec = ft_atoi(*str);
-		(*str) += find_size_dec(flg->prec);
+		while (**str == '0')
+			(*str)++;
+		if (flg->prec != 0)
+			(*str) += find_size_dec(flg->prec);
 	}
 	else
 	{

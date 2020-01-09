@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 20:53:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/16 19:42:27 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/09 23:24:40 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			print_s(t_struct *st, t_flags *flg, const char **str)
 	if (str_read == NULL)
 	{
 		st->min_int = 1;
-		if (flg->field > 0 && flg->dash == 0 && flg->dot == 1 
+		if (flg->field > 0 && flg->dash == 0 && flg->dot == 1
 			&& flg->prec > 6)
 		{
 			st->bool = 1;
@@ -49,5 +49,5 @@ void			print_s(t_struct *st, t_flags *flg, const char **str)
 	check_s(flg, st, size);
 	ft_putnstr(str_read, st->read);
 	if (flg->dash == 1)
-		print_field_d1(flg);
+		print_field_d1s(flg, st, size);
 }

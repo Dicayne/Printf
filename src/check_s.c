@@ -6,11 +6,28 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 23:36:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/16 19:42:05 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/09 23:23:58 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
+
+static void		check_s3(t_flags *flg, t_struct *st, int size)
+{
+	if (flg->prec > size)
+	{
+		if (st->bool == 1)
+			flg->field -= 6;
+		flg->field -= size;
+	}
+	else if (flg->field == size && flg->prec >= 0 && flg->prec <= size)
+		flg->field -= flg->prec;
+	else if (flg->field > size && flg->prec <= size && flg->dash == 0)
+		flg->field -= size;
+	else if (flg->field > size && flg->prec < size)
+		flg->field -= flg->prec;
+	print_0s(flg);
+}
 
 static void		check_s2(t_flags *flg, t_struct *st, int size)
 {
@@ -24,8 +41,6 @@ static void		check_s2(t_flags *flg, t_struct *st, int size)
 		}
 		else if (st->min_int == 1 && flg->dash == 0)
 			flg->field = 0;
-		else if (flg->field < size && st->min_int == 1)
-			flg->field = 0;
 	}
 	else
 	{
@@ -33,20 +48,8 @@ static void		check_s2(t_flags *flg, t_struct *st, int size)
 			flg->field -= size;
 		st->read = size;
 	}
-	if (flg->field >= size)
-	{
-		if (flg->prec > size)
-		{
-			if (st->bool == 1)
-				flg->field -= 6;
-			flg->field -= size;
-		}
-		else if (flg->prec >= 0)
-			flg->field -= flg->prec;
-		else if (flg->field > size)
-			flg->field -= size;
-		print_0s(flg);
-	}
+	if (flg->field >= size && st->min_int == 0)
+		check_s3(flg, st, size);
 }
 
 void			check_s(t_flags *flg, t_struct *st, int size)
