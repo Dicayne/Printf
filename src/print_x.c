@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 21:50:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 20:12:49 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/10 17:11:17 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void			print_x(t_struct *st, t_flags *flg, const char **str)
 	if (st->bool == 0)
 		ft_putstr(hex);
 	if (flg->dash == 1)
-		print_field_d1(flg);
+		print_field_d1(flg, st, i, 0);
 	free(hex);
 }

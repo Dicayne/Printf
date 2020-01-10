@@ -6,19 +6,21 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 23:36:50 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/09 23:09:38 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/10 22:24:17 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-static void		check_di3(t_flags *flg, int nbr, int size)
+static void		check_di3(t_flags *flg, int size)
 {
-	(void)nbr;
 	if (flg->field > flg->prec && flg->prec >= size)
 	{
 		if (flg->prec >= size && flg->less == 1)
-			flg->field = 0;
+		{
+			flg->field -= flg->prec + 1;
+			flg->less2 = 1;
+		}
 		else
 			flg->field = flg->field - flg->prec;
 		flg->prec = flg->prec - size;
@@ -58,7 +60,7 @@ static void		check_di2(t_flags *flg, int nbr, int size)
 		print_0(flg);
 	}
 	else
-		check_di3(flg, nbr, size);
+		check_di3(flg, size);
 }
 
 void			check_di(t_flags *flg, t_struct *st, int nbr, int size)

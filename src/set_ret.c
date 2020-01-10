@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 00:53:51 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/09 23:19:43 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/10 16:33:50 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int		set_ret_di(t_flags *flg, int nbr, int size)
 {
 	if (flg->prec == 0 && nbr == 0 && flg->dot == 1 && flg->field == 0)
 		return (0);
-	if (flg->field > flg->prec && flg->prec >= size && flg->less == 1)
+	else if (flg->field > flg->prec && flg->prec > size && flg->less == 1)
+		return (flg->field - 1);
+	else if (flg->field > flg->prec && flg->prec >= size && flg->less == 1)
 		return (flg->prec);
 	else if (flg->field > size && flg->prec <= flg->field)
 		return (flg->field);

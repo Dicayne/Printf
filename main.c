@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 15:17:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/09 23:07:36 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/10 23:43:56 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,16 @@ int main()
 	int p;
 	int ftp;
 
-	ftp = ft_printf("M:%2.9p|\n", 1234);
-		p =  printf("B:%2.9p|\n", 1234);
-	printf("MYPF:%d			BASE:%d\n", ftp, p);
-	if (p == ftp)
-		printf("\033[0;42m               OK :) \033[0m\n");
-	else
-		printf("\033[0;41m               KO :( \033[0m\n");
-	
-	ftp = ft_printf("M:%5.p|\n", 0);
-		p =  printf("B:%5.p|\n", 0);
+	ftp = ft_printf("M:%16.*d|\n", -8, -2147483647);
+		p =  printf("B:%16.*d|\n", -8, -2147483647);
 	printf("MYPF:%d			BASE:%d\n", ftp, p);
 	if (p == ftp)
 		printf("\033[0;42m               OK :) \033[0m\n");
 	else
 		printf("\033[0;41m               KO :( \033[0m\n");
 
-	ftp = ft_printf("M:%2.p|\n", NULL);
-		p =  printf("B:%2.p|\n", NULL);
+	ftp = ft_printf("M:%.*i|\n", -6, -3);
+		p =  printf("B:%.*i|\n", -6, -3);
 	printf("MYPF:%d			BASE:%d\n", ftp, p);
 	if (p == ftp)
 		printf("\033[0;42m               OK :) \033[0m\n");

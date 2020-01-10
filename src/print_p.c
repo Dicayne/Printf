@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 21:54:08 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/09 23:18:58 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/10 17:11:43 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void			print_p(t_struct *st, t_flags *flg, const char **str)
 	if (!(nbr == 0 && flg->prec == 0 && flg->dot == 1))
 		ft_putstr(adr);
 	if (flg->dash == 1)
-		print_field_d1(flg);
+		print_field_d1(flg, st, i, 0);
 	free(adr);
-	if (flg->dash == 1)
-		print_field_d1(flg);
 }

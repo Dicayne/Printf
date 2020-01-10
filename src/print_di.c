@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 21:14:25 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/09 23:24:36 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/10 22:19:42 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int		check_negative(int nbr, t_struct *st, t_flags *flg, int *size)
 	else if (nbr < 0 && (flg->prec >= *size || flg->zero == 1 ||
 				flg->prec_neg == 1))
 	{
-		ft_putchar('-');
 		if (flg->dot == 1 && flg->zero == 0)
 		{
 			(*size)--;
@@ -34,6 +33,9 @@ static int		check_negative(int nbr, t_struct *st, t_flags *flg, int *size)
 			st->nb_read++;
 		}
 		flg->less = 1;
+		if (!(flg->less == 1 && flg->field > flg->prec &&
+				flg->dash == 0 && flg->dot == 1))
+			ft_putchar('-');
 		return (-nbr);
 	}
 	else
@@ -56,5 +58,5 @@ void			print_di(t_struct *st, t_flags *flg, const char **str)
 	if (st->bool == 0)
 		ft_putnbr(nbr);
 	if (flg->dash == 1)
-		print_field_d1(flg);
+		print_field_d1(flg, st, size, 0);
 }

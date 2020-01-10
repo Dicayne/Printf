@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 23:36:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/09 23:23:58 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/10 20:57:49 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,26 @@
 
 static void		check_s3(t_flags *flg, t_struct *st, int size)
 {
-	if (flg->prec > size)
+	if (flg->field >= size && st->min_int == 0 && flg->prec_neg == 0)
 	{
-		if (st->bool == 1)
-			flg->field -= 6;
-		flg->field -= size;
+		if (flg->prec > size)
+		{
+			if (st->bool == 1)
+				flg->field -= 6;
+			flg->field -= size;
+		}
+		else if (flg->field == size && flg->prec >= 0 && flg->prec <= size)
+			flg->field -= flg->prec;
+		else if (flg->field > size && flg->prec <= size && flg->dash == 0)
+			flg->field -= size;
+		else if (flg->field > size && flg->prec < size)
+			flg->field -= flg->prec;
+		print_0s(flg);
 	}
-	else if (flg->field == size && flg->prec >= 0 && flg->prec <= size)
-		flg->field -= flg->prec;
-	else if (flg->field > size && flg->prec <= size && flg->dash == 0)
-		flg->field -= size;
-	else if (flg->field > size && flg->prec < size)
-		flg->field -= flg->prec;
-	print_0s(flg);
+	else if (st->min_int == 1 && flg->prec_neg == 1)
+		print_0s(flg);
+	else if (flg->prec_neg == 1 && flg->field > flg->prec && st->min_int == 0)
+		print_0s(flg);
 }
 
 static void		check_s2(t_flags *flg, t_struct *st, int size)
@@ -45,11 +52,15 @@ static void		check_s2(t_flags *flg, t_struct *st, int size)
 	else
 	{
 		if (flg->prec_neg == 1)
-			flg->field -= size;
+		{
+			if (flg->prec < size && st->min_int == 1)
+				flg->field -= size - flg->prec;
+			else
+				flg->field -= size;
+		}
 		st->read = size;
 	}
-	if (flg->field >= size && st->min_int == 0)
-		check_s3(flg, st, size);
+	check_s3(flg, st, size);
 }
 
 void			check_s(t_flags *flg, t_struct *st, int size)

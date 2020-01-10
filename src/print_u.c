@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 21:18:43 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 20:10:23 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/10 17:10:12 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void			print_u(t_struct *st, t_flags *flg, const char **str)
 	if (st->bool == 0)
 		ft_putnbr_u(nbr);
 	if (flg->dash == 1)
-		print_field_d1(flg);
+		print_field_d1(flg, st, size, 0);
 }
