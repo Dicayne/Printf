@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:54:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/09 17:47:29 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/13 16:06:57 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void			check_flags(t_flags *flg, t_struct *st, const char **str)
 		flg->zero = 0;
 	if ((**str >= '0' && **str <= '9') || **str == '*')
 		check_field(str, flg, st);
+	else if (**str == '.')
+		flg->ptr = 2;
 	if (**str == '.')
 	{
 		flg->dot = 1;

@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:26:47 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/10 17:32:53 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/13 21:09:06 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void			print_x(t_struct *st, t_flags *flg, const char **str);
 void			print_field_d1(t_flags *flg, t_struct *st, int size, int bool);
 void			print_0(t_flags *flg);
 void			print_0s(t_flags *flg);
-void			print_0d(t_flags *flg);
 int				set_ret(t_flags *flg, int nbr, int size);
 int				set_ret_di(t_flags *flg, int nbr, int size);
 int				set_ret_s(t_flags *flg, int size);

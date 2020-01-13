@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 20:53:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/10 17:10:06 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/13 21:17:00 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ static void		ft_putnstr(char *str, int n)
 	}
 }
 
+static	void	s_is_null(t_struct *st, t_flags *flg)
+{
+	st->min_int = 1;
+	if (flg->field > 0 && flg->dash == 0 && flg->dot == 1
+		&& flg->prec > 6)
+	{
+		st->bool = 1;
+		if (flg->field <= 6)
+			st->nb_read -= flg->field;
+		else
+			st->nb_read -= 6;
+		flg->field += 6;
+	}
+}
+
 void			print_s(t_struct *st, t_flags *flg, const char **str)
 {
 	char	*str_read;
@@ -34,14 +49,7 @@ void			print_s(t_struct *st, t_flags *flg, const char **str)
 	str_read = va_arg(st->args, char *);
 	if (str_read == NULL)
 	{
-		st->min_int = 1;
-		if (flg->field > 0 && flg->dash == 0 && flg->dot == 1
-			&& flg->prec > 6)
-		{
-			st->bool = 1;
-			flg->field += 6;
-			st->nb_read -= 6;
-		}
+		s_is_null(st, flg);
 		str_read = "(null)";
 	}
 	size = ft_strlen(str_read);

@@ -6,11 +6,30 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 21:14:25 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/10 22:19:42 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/01/13 21:17:41 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
+
+static int		check_negative2(int nbr, t_struct *st, t_flags *flg, int *size)
+{
+	if (flg->field == 0 && flg->prec == -1 && flg->dash == 0)
+		st->bool = 5;
+	if (flg->dot == 1 && flg->zero == 0)
+	{
+		(*size)--;
+		if (flg->prec_neg == 1 && flg->ptr != 2)
+			flg->field--;
+		st->nb_read++;
+	}
+	flg->less = 1;
+	if (!(flg->less == 1 && flg->field > flg->prec &&
+			flg->dash == 0 && flg->dot == 1))
+		if (st->bool != 5)
+			ft_putchar('-');
+	return (-nbr);
+}
 
 static int		check_negative(int nbr, t_struct *st, t_flags *flg, int *size)
 {
@@ -24,20 +43,7 @@ static int		check_negative(int nbr, t_struct *st, t_flags *flg, int *size)
 	}
 	else if (nbr < 0 && (flg->prec >= *size || flg->zero == 1 ||
 				flg->prec_neg == 1))
-	{
-		if (flg->dot == 1 && flg->zero == 0)
-		{
-			(*size)--;
-			if (flg->prec_neg == 1)
-				flg->field--;
-			st->nb_read++;
-		}
-		flg->less = 1;
-		if (!(flg->less == 1 && flg->field > flg->prec &&
-				flg->dash == 0 && flg->dot == 1))
-			ft_putchar('-');
-		return (-nbr);
-	}
+		return (check_negative2(nbr, st, flg, size));
 	else
 		return (nbr);
 }
